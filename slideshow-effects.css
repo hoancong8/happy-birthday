@@ -1,0 +1,472 @@
+/* ════════════════════════════════════════
+   ENHANCED LAYER 8 — CINEMATIC SLIDESHOW
+════════════════════════════════════════ */
+
+/* ── ENHANCED SLIDE FRAME ── */
+#slideFrame {
+  background: linear-gradient(135deg, rgba(13, 5, 48, 0.8), rgba(8, 0, 26, 0.8));
+  border: 2px solid rgba(232, 201, 106, 0.2);
+  box-shadow: 
+    0 0 60px rgba(155, 93, 229, 0.3),
+    inset 0 0 40px rgba(232, 201, 106, 0.1),
+    0 30px 80px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: visible;
+}
+
+#slideFrame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(232, 201, 106, 0.05) 50%, transparent 70%);
+  pointer-events: none;
+  animation: frameShine 3s ease-in-out infinite;
+}
+
+#slideFrame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, rgba(232, 201, 106, 0.3), rgba(155, 93, 229, 0.3)) 1;
+  opacity: 0;
+  animation: framePulse 2s ease-in-out infinite;
+}
+
+@keyframes frameShine {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes framePulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* ── ENHANCED SLIDE PHOTOS ── */
+.sf-photo {
+  background: linear-gradient(135deg, rgba(13, 5, 48, 0.9), rgba(5, 1, 32, 0.9));
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-photo::before,
+.sf-photo::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  z-index: 5;
+}
+
+.sf-photo::before {
+  top: 0;
+}
+
+.sf-photo::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+/* ── ENHANCED PHOTO INNER ── */
+.sph-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.sph-inner span {
+  font-size: 4rem;
+  animation: photoEmojiFloat 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(232, 201, 106, 0.4));
+}
+
+@keyframes photoEmojiFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.sph-inner p {
+  font-family: var(--ff-script);
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 20px rgba(232, 201, 106, 0.3);
+  animation: photoTextShimmer 3s ease-in-out infinite;
+}
+
+@keyframes photoTextShimmer {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; text-shadow: 0 0 30px rgba(232, 201, 106, 0.6); }
+}
+
+/* ── SLIDE TRANSITION EFFECT ── */
+.sf-photo {
+  animation: slideTransition 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.sf-photo.active {
+  animation: slideTransitionActive 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideTransition {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateX(50px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slideTransitionActive {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(10px);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ── ENHANCED PROGRESS BARS ── */
+.sf-bar {
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.sf-bar:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(232, 201, 106, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 3px !important;
+}
+
+.sf-bar.active::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--rose2));
+  animation: barFillAdvanced 4s linear forwards;
+  box-shadow: 0 0 10px rgba(232, 201, 106, 0.6);
+}
+
+@keyframes barFillAdvanced {
+  0% {
+    width: 0;
+    box-shadow: 0 0 0px rgba(232, 201, 106, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(232, 201, 106, 0.8);
+  }
+  100% {
+    width: 100%;
+    box-shadow: 0 0 0px rgba(232, 201, 106, 0.6);
+  }
+}
+
+/* ── CINEMA BARS ENHANCEMENT ── */
+.cinema-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+  z-index: 101;
+  pointer-events: none;
+}
+
+.cinema-bar-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.cinema-bar-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+/* ── ENHANCED FOOTER ── */
+.l8-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.l8-quote {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 450px;
+  line-height: 1.7;
+  text-shadow: 0 0 20px rgba(232, 67, 147, 0.2);
+  position: relative;
+  animation: quoteGlow 3s ease-in-out infinite;
+}
+
+@keyframes quoteGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(232, 67, 147, 0.2); }
+  50% { text-shadow: 0 0 30px rgba(232, 67, 147, 0.5); }
+}
+
+.l8-quote::before,
+.l8-quote::after {
+  content: '✦';
+  color: var(--gold);
+  margin: 0 0.5rem;
+  animation: floatDecor 2s ease-in-out infinite;
+}
+
+.l8-quote::after {
+  animation-delay: 0.3s;
+}
+
+@keyframes floatDecor {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+.l8-sig {
+  font-family: var(--ff-script);
+  font-size: 1.6rem;
+  color: var(--rose2);
+  margin-top: 0.5rem;
+  text-shadow: 0 0 20px rgba(232, 67, 147, 0.5);
+  animation: sigWave 3s ease-in-out infinite;
+}
+
+@keyframes sigWave {
+  0%, 100% { text-shadow: 0 0 20px rgba(232, 67, 147, 0.5); }
+  50% { text-shadow: 0 0 40px rgba(232, 67, 147, 0.8); }
+}
+
+/* ── SLIDE FRAME DECORATIONS ── */
+.slide-frame-decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.decoration-corner {
+  width: 20px;
+  height: 20px;
+  border-color: rgba(232, 201, 106, 0.4);
+  border-style: solid;
+}
+
+.decoration-corner.tl {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+
+.decoration-corner.tr {
+  top: 0;
+  right: 0;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+
+.decoration-corner.bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+
+.decoration-corner.br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* ── ENHANCED CONTENT AREA ── */
+.l8-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── RESTART BUTTON ENHANCEMENT ── */
+#l8-restart {
+  position: relative;
+  padding: 0.85rem 2.8rem;
+  background: linear-gradient(135deg, rgba(232, 201, 106, 0.15), rgba(244, 162, 97, 0.1));
+  border: 2px solid rgba(232, 201, 106, 0.4);
+  border-radius: 50px;
+  color: var(--gold);
+  font-family: var(--ff-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+#l8-restart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+#l8-restart:hover {
+  background: linear-gradient(135deg, rgba(232, 201, 106, 0.3), rgba(244, 162, 97, 0.25));
+  box-shadow: 0 0 30px rgba(232, 201, 106, 0.4);
+  transform: translateY(-2px) scale(1.05);
+  border-color: rgba(232, 201, 106, 0.6);
+}
+
+#l8-restart:hover::before {
+  left: 100%;
+}
+
+#l8-restart:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ── PHOTO FRAME GLOW ── */
+.slide-frame.show {
+  animation: slideFrameAppear 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideFrameAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ── FOOTER APPEAR ANIMATION ── */
+.l8-footer.show {
+  animation: footerSlideUp 1s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
+  opacity: 0;
+}
+
+@keyframes footerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── LAYER 8 BACKGROUND ENHANCEMENT ── */
+#layer-8 {
+  background: 
+    radial-gradient(ellipse at 50% 50%, rgba(8, 0, 26, 0.9), rgba(2, 0, 10, 1)),
+    linear-gradient(135deg, rgba(155, 93, 229, 0.05), rgba(232, 67, 147, 0.05));
+  position: relative;
+}
+
+#layer-8::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(232, 201, 106, 0.03), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(155, 93, 229, 0.03), transparent 50%);
+  animation: bgMesh 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes bgMesh {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ── ENHANCED PROGRESS AREA ── */
+#sfBars {
+  position: absolute;
+  bottom: 15%;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+#sfBars::before {
+  content: '';
+  position: absolute;
+  inset: -8px -8px -8px -8px;
+  background: linear-gradient(90deg, var(--gold), var(--rose2));
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  animation: barGlowPulse 2s ease-in-out infinite;
+}
+
+@keyframes barGlowPulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.2; }
+}
+
+/* ── SMOOTH TRANSITIONS ── */
+#sfInner {
+  position: absolute;
+  inset: 0;
+}
+
+/* ── RESPONSIVE ENHANCEMENTS ── */
+@media (max-width: 768px) {
+  #slideFrame {
+    width: clamp(280px, 90vw, 580px);
+  }
+  
+  .sph-inner span {
+    font-size: 3rem;
+  }
+  
+  .l8-quote {
+    font-size: 1rem;
+  }
+  
+  .l8-sig {
+    font-size: 1.3rem;
+  }
+}
