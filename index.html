@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Món Quà Đặc Biệt ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- CANVAS GLOBAL -->
+<canvas id="global-canvas"></canvas>
+
+<!-- Custom Cursor -->
+<div id="custom-cursor"><div class="cursor-star">✦</div></div>
+
+<!-- ══ LAYER 1: Gift Box ══ -->
+<div id="layer-1" class="layer active">
+  <canvas id="stars-canvas"></canvas>
+  <div class="l1-content">
+    <p class="l1-tagline" id="l1-tagline"></p>
+    <div class="gift-wrap" id="giftWrap">
+      <div class="gift-box" id="giftBox">
+        <!-- Light ray burst container -->
+        <div class="gift-rays" id="giftRays"></div>
+        <div class="gift-lid" id="giftLid">
+          <div class="lid-ribbon-v"></div>
+          <div class="lid-ribbon-h"></div>
+          <div class="lid-bow">
+            <div class="bow-left"></div>
+            <div class="bow-right"></div>
+            <div class="bow-center"></div>
+            <!-- Bow particle trail -->
+            <div class="bow-trail" id="bowTrail"></div>
+          </div>
+        </div>
+        <div class="gift-body">
+          <div class="body-ribbon-v"></div>
+          <div class="body-ribbon-h"></div>
+          <div class="gift-glow"></div>
+        </div>
+        <div class="gift-shine"></div>
+      </div>
+      <p class="gift-hint" id="giftHint">✦ Click để mở ✦</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYER 2: First Memory ══ -->
+<div id="layer-2" class="layer">
+  <canvas id="particles-canvas"></canvas>
+  <div class="l2-content">
+    <div class="memory-frame" id="memoryFrame">
+      <div class="mf-inner">
+        <div class="mf-photo">
+          <div class="photo-placeholder">
+            <span class="pp-icon">📸</span>
+            <span class="pp-text">Ảnh kỷ niệm đầu tiên</span>
+          </div>
+          <!-- Film grain overlay -->
+          <div class="film-grain"></div>
+          <div class="mf-overlay"></div>
+          <div class="mf-corner tl"></div>
+          <div class="mf-corner tr"></div>
+          <div class="mf-corner bl"></div>
+          <div class="mf-corner br"></div>
+          <!-- Vignette -->
+          <div class="photo-vignette"></div>
+        </div>
+      </div>
+    </div>
+    <p class="l2-text" id="l2-text"></p>
+    <button class="story-btn" id="l2-btn" style="opacity:0">Tiếp tục →</button>
+  </div>
+</div>
+
+<!-- ══ LAYER 3: Polaroid Gallery ══ -->
+<div id="layer-3" class="layer">
+  <div class="l3-bg"></div>
+  <!-- Bokeh circles background -->
+  <div class="bokeh-field" id="bokehField"></div>
+  <div class="section-title-wrap">
+    <p class="sec-eyebrow">Những khoảnh khắc đẹp nhất</p>
+    <h2 class="sec-title">Ký ức của chúng ta</h2>
+  </div>
+  <div class="polaroid-field" id="polaroidField">
+    <div class="polaroid" data-delay="0" style="--rx:-4deg;--ry:3deg;--x:-35%;--y:-15%">
+      <div class="pol-photo"><span>🌸</span></div>
+      <p class="pol-caption">Buổi sáng đầu tiên</p>
+    </div>
+    <div class="polaroid" data-delay="150" style="--rx:3deg;--ry:-2deg;--x:30%;--y:-20%">
+      <div class="pol-photo"><span>✨</span></div>
+      <p class="pol-caption">Những chuyến đi</p>
+    </div>
+    <div class="polaroid" data-delay="300" style="--rx:-2deg;--ry:5deg;--x:-40%;--y:15%">
+      <div class="pol-photo"><span>💫</span></div>
+      <p class="pol-caption">Tiếng cười</p>
+    </div>
+    <div class="polaroid" data-delay="450" style="--rx:5deg;--ry:-3deg;--x:35%;--y:20%">
+      <div class="pol-photo"><span>🌟</span></div>
+      <p class="pol-caption">Phút giây bình yên</p>
+    </div>
+    <div class="polaroid" data-delay="600" style="--rx:-3deg;--ry:-4deg;--x:-10%;--y:25%">
+      <div class="pol-photo"><span>💖</span></div>
+      <p class="pol-caption">Mãi mãi nhớ</p>
+    </div>
+    <div class="polaroid" data-delay="750" style="--rx:2deg;--ry:4deg;--x:10%;--y:-5%">
+      <div class="pol-photo"><span>🌹</span></div>
+      <p class="pol-caption">Khoảnh khắc này</p>
+    </div>
+  </div>
+  <button class="story-btn" id="l3-btn" style="opacity:0;margin-top:auto;position:absolute;bottom:3rem">Mở bí mật tiếp theo ✦</button>
+</div>
+
+<!-- ══ LAYER 4: Letter ══ -->
+<div id="layer-4" class="layer">
+  <div class="l4-bg"></div>
+  <div class="l4-content">
+    <div class="envelope-scene" id="envelopeScene">
+      <div class="env-outer" id="envOuter">
+        <div class="env-back"></div>
+        <div class="env-flap-left"></div>
+        <div class="env-flap-right"></div>
+        <div class="env-flap-bottom"></div>
+        <div class="env-flap-top" id="envFlapTop"></div>
+        <div class="env-front">
+          <div class="env-seal" id="envSeal">
+            <span class="seal-heart">♥</span>
+            <div class="seal-crack" id="sealCrack"></div>
+          </div>
+          <p class="env-to">Gửi em yêu ♥</p>
+          <p class="env-hint" id="envHint">✦ Click để mở thư ✦</p>
+        </div>
+      </div>
+    </div>
+    <div class="letter-reveal" id="letterReveal">
+      <div class="letter-paper">
+        <!-- Paper fold lines -->
+        <div class="paper-fold fold-h"></div>
+        <div class="paper-fold fold-v"></div>
+        <!-- Corner curl -->
+        <div class="corner-curl"></div>
+        <div class="letter-watermark">♥</div>
+        <div class="lp-header">
+          <span class="lp-deco">— ✦ —</span>
+        </div>
+        <p class="lp-salutation">Em yêu dấu,</p>
+        <div class="lp-body" id="lpBody">
+          <p class="lp-line" data-line="0">Hôm nay là một ngày đặc biệt mà vũ trụ đã dành riêng cho em —</p>
+          <p class="lp-line" data-line="1">ngày mà ánh sáng đầu tiên chạm vào thế giới này qua đôi mắt em.</p>
+          <p class="lp-line" data-line="2">Từ khoảnh khắc anh gặp em, mọi thứ đã thay đổi theo cách</p>
+          <p class="lp-line" data-line="3">mà anh không thể diễn tả bằng lời.</p>
+          <p class="lp-line" data-line="4">Em xứng đáng được nhận tất cả tình yêu của thế giới này,</p>
+          <p class="lp-line" data-line="5">và anh mong em luôn biết điều đó.</p>
+          <p class="lp-line lp-wish" data-line="6">Chúc em sinh nhật thật hạnh phúc ✦</p>
+        </div>
+        <p class="lp-signature">Với tất cả tình yêu, Anh ♥</p>
+        <button class="story-btn story-btn-sm" id="l4-btn" style="opacity:0;margin-top:2rem">Khám phá tiếp →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYER 5: Time Portal / Timeline ══ -->
+<div id="layer-5" class="layer">
+  <canvas id="portal-canvas"></canvas>
+  <div class="l5-content">
+    <div class="portal-door-wrap" id="portalDoorWrap">
+      <div class="portal-door" id="portalDoor">
+        <div class="pd-left" id="pdLeft"></div>
+        <div class="pd-right" id="pdRight"></div>
+        <!-- Aurora rings inside portal -->
+        <div class="pd-aurora">
+          <div class="aurora-ring" style="--s:60px;--col:#9B5DE5;--spd:3s"></div>
+          <div class="aurora-ring" style="--s:90px;--col:#E84393;--spd:4s"></div>
+          <div class="aurora-ring" style="--s:120px;--col:#00D4AA;--spd:5s"></div>
+          <div class="aurora-ring" style="--s:150px;--col:#E8C96A;--spd:6s"></div>
+        </div>
+        <div class="pd-glow"></div>
+        <div class="pd-handle-wrap">
+          <div class="pd-handle"></div>
+        </div>
+        <p class="pd-text">Cánh cửa ký ức</p>
+        <p class="pd-hint">✦ Click để bước vào ✦</p>
+      </div>
+    </div>
+    <div class="timeline-reveal" id="timelineReveal">
+      <h2 class="tl-heading">Hành trình của chúng ta</h2>
+      <!-- Animated SVG spine -->
+      <svg class="tl-svg-spine" id="tlSpineSvg" viewBox="0 0 4 400" preserveAspectRatio="none">
+        <line id="tlSpineLine" x1="2" y1="0" x2="2" y2="400" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="400" stroke-dashoffset="400"/>
+      </svg>
+      <div class="tl-spine"></div>
+      <div class="tl-items" id="tlItems">
+        <div class="tl-node" data-idx="0">
+          <div class="tln-dot"><span>🌟</span></div>
+          <div class="tln-card">
+            <span class="tln-year">Ngày đầu tiên</span>
+            <h3>Lần đầu gặp nhau</h3>
+            <p>Khoảnh khắc đầu tiên khi ánh mắt chạm nhau — một cảm giác không thể nhầm lẫn.</p>
+          </div>
+        </div>
+        <div class="tl-node tl-node-r" data-idx="1">
+          <div class="tln-dot"><span>💫</span></div>
+          <div class="tln-card">
+            <span class="tln-year">Những ngày sau đó</span>
+            <h3>Từng bước bên nhau</h3>
+            <p>Mỗi ngày trôi qua là thêm một trang ký ức mới, đẹp hơn ngày hôm qua.</p>
+          </div>
+        </div>
+        <div class="tl-node" data-idx="2">
+          <div class="tln-dot"><span>🌸</span></div>
+          <div class="tln-card">
+            <span class="tln-year">Những kỷ niệm</span>
+            <h3>Cười, khóc, và mọi điều</h3>
+            <p>Tất cả những khoảnh khắc bình thường nhất lại trở thành kỷ niệm đẹp nhất.</p>
+          </div>
+        </div>
+        <div class="tl-node tl-node-r" data-idx="3">
+          <div class="tln-dot"><span>✨</span></div>
+          <div class="tln-card">
+            <span class="tln-year">Hôm nay</span>
+            <h3>Sinh nhật hạnh phúc</h3>
+            <p>Và hôm nay — ngày đặc biệt nhất — anh muốn em biết rằng em ý nghĩa như thế nào.</p>
+          </div>
+        </div>
+      </div>
+      <button class="story-btn" id="l5-btn" style="opacity:0;margin-top:3rem">Tôi đã sẵn sàng →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LAYER 6: Ready? ══ -->
+<div id="layer-6" class="layer">
+  <canvas id="ready-canvas"></canvas>
+  <div class="l6-content">
+    <!-- Orbiting mini-orbs -->
+    <div class="orb-system">
+      <div class="ready-orb"></div>
+      <div class="orb-orbit orbit-1">
+        <div class="mini-orb" style="background:var(--gold)"></div>
+      </div>
+      <div class="orb-orbit orbit-2">
+        <div class="mini-orb" style="background:var(--rose2)"></div>
+      </div>
+      <div class="orb-orbit orbit-3">
+        <div class="mini-orb" style="background:var(--cyan)"></div>
+      </div>
+    </div>
+    <p class="ready-eyebrow">Bất ngờ cuối cùng đang chờ em...</p>
+    <h2 class="ready-question" id="readyQ"></h2>
+    <div class="ready-stars">✦ ✦ ✦</div>
+    <button class="ready-btn" id="readyBtn">
+      <span class="rbtn-glow"></span>
+      <span>✦ Sẵn sàng ✦</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══ LAYER 7: Grand Finale ══ -->
+<div id="layer-7" class="layer">
+  <canvas id="finale-canvas"></canvas>
+  <!-- Floating hearts container -->
+  <div id="floatingHeartsContainer"></div>
+  <div class="l7-content" id="l7Content">
+    <div class="finale-name-wrap">
+      <p class="finale-pre">🎂 Chúc Mừng Sinh Nhật 🎂</p>
+      <h1 class="finale-name" id="finaleName">Người Thân Yêu</h1>
+      <div class="finale-hearts" id="finaleHearts"></div>
+      <p class="finale-msg">Chúc em luôn hạnh phúc, tươi cười và đạt được mọi điều em mong muốn ❤️</p>
+    </div>
+    <button class="story-btn" id="l7-btn" style="opacity:0;margin-top:3rem;font-size:1rem">Xem thêm ảnh kỷ niệm →</button>
+  </div>
+</div>
+
+<!-- ══ LAYER 8: Cinematic Slideshow ══ -->
+<div id="layer-8" class="layer">
+  <div class="slideshow-bg" id="slideshowBg"></div>
+  <canvas id="slide-canvas"></canvas>
+  <!-- Cinematic bars that animate in -->
+  <div class="cinema-bar cinema-bar-top" id="cinemaTop"></div>
+  <div class="cinema-bar cinema-bar-bottom" id="cinemaBottom"></div>
+  <div class="l8-content">
+    <div class="slide-frame" id="slideFrame">
+      <div class="sf-inner" id="sfInner">
+        <div class="sf-photo active" data-slide="0">
+          <div class="sph-inner ken-burns"><span>🌸</span><p>Kỷ niệm 1</p></div>
+        </div>
+        <div class="sf-photo" data-slide="1">
+          <div class="sph-inner ken-burns"><span>💫</span><p>Kỷ niệm 2</p></div>
+        </div>
+        <div class="sf-photo" data-slide="2">
+          <div class="sph-inner ken-burns"><span>✨</span><p>Kỷ niệm 3</p></div>
+        </div>
+        <div class="sf-photo" data-slide="3">
+          <div class="sph-inner ken-burns"><span>💖</span><p>Kỷ niệm 4</p></div>
+        </div>
+      </div>
+      <div class="sf-bars" id="sfBars">
+        <div class="sf-bar active" data-idx="0"></div>
+        <div class="sf-bar" data-idx="1"></div>
+        <div class="sf-bar" data-idx="2"></div>
+        <div class="sf-bar" data-idx="3"></div>
+      </div>
+    </div>
+    <div class="l8-footer">
+      <p class="l8-quote">"Mỗi khoảnh khắc bên em là một điều kỳ diệu."</p>
+      <p class="l8-sig">— Happy Birthday ♥</p>
+      <button class="story-btn" id="l8-restart" style="opacity:0;margin-top:1.5rem;font-size:.85rem">↺ Xem lại từ đầu</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSITION OVERLAY -->
+<div id="transition-overlay"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
